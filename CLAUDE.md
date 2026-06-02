@@ -2,9 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 仓库说明
+## 项目结构与模块组织
+- `docs/changes/`：按日期记录每次 AI 会话产生的仓库改动，文件名格式为 `YYYY-MM-DD-<topic>.md`。
 
-这是一个 Claude Code 使用技巧仓库，核心产出是 `setting/claude-settings-recommended.json`——可直接复制到 `~/.claude/settings.json` 或项目级 `.claude/settings.json` 使用的推荐配置。
+## 仓库说明
+- `README.md`：仓库入口、内容索引和使用建议。
+- `docs/changes/`：按日期记录每次 AI 会话产生的仓库改动，文件名格式为 `YYYY-MM-DD-<topic>.md`。
 
 ## 配置文件结构
 
