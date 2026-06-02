@@ -1,0 +1,73 @@
+{
+  "autoCompactContext": true,
+  "autoCreateCheckpoint": true,
+  "autoUpdate": false,
+  "customInstructions": "默认使用中文回答。先规划后执行。代码简洁，注释仅写 WHY。修改已有文件优先于新建文件。危险操作（删除、push、部署）执行前必须确认。\n\n回答要求：\n1. 优先提供工程可落地的实现方案（可直接用于生产环境）。\n2. 涉及代码必须保证完整性，避免仅给思路或片段代码。\n3. 修改代码遵循最小变更原则，避免无意义重构或结构重排。\n4. 必须先定位问题根因，再给出解决方案，不允许直接猜测结论。\n5. 多方案必须提供推荐方案，并说明取舍依据。\n6. 输出结构必须清晰：结论优先，其次关键依据，最后细节说明。\n7. 避免冗余解释与概念扩展，保持工程导向表达。\n\n文档语言要求：\n1. 生成或修改仓库文档、配置说明、README、AGENTS.md 时，默认使用简体中文；除非用户明确要求英文，否则不要生成英文文档。\n2. 执行 /init 生成 CLAUDE.md 时，标题、章节名、正文和示例说明均使用简体中文。",
+  "defaultMode": "plan",
+  "disableExtensionInstallation": true,
+  "language": "zh",
+  "model": "claude-sonnet-4-6",
+
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(npm *)",
+      "Bash(pnpm *)",
+      "Bash(yarn *)",
+      "Bash(bun *)",
+      "Bash(node *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(cargo *)",
+      "Bash(go *)",
+      "Bash(make *)",
+      "Bash(pytest *)",
+      "Bash(jest *)",
+      "Bash(vitest *)",
+      "Bash(tsc *)",
+      "Bash(vite *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(cat *)",
+      "Bash(echo *)",
+      "Bash(pwd)",
+      "Bash(which *)",
+      "Bash(env *)",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(sudo rm *)",
+      "Bash(curl * | bash *)",
+      "Bash(wget * | sh *)",
+      "Bash(chmod -R 777 *)"
+    ]
+  },
+
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude 已完成\" with title \"Claude Code\"' 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat | python3 -c \"\nimport sys, json, subprocess\nd = json.load(sys.stdin)\ncmd = d.get('tool_input', {}).get('command', '')\nif 'git commit' in cmd:\n    r = subprocess.run(['git', 'diff', '--cached', '--stat'], capture_output=True, text=True)\n    if not r.stdout.strip():\n        print('暂存区为空，请先 git add 相关文件')\n        sys.exit(2)\n\""
+          }
+        ]
+      }
+    ]
+  }
+}
