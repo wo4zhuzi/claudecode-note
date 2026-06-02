@@ -1,0 +1,2 @@
+# claudecode-note
+claudecode-note
