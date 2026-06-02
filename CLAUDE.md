@@ -2,8 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 项目结构与模块组织
-- `docs/changes/`：按日期记录每次 AI 会话产生的仓库改动，文件名格式为 `YYYY-MM-DD-<topic>.md`。
 
 ## 仓库说明
 - `README.md`：仓库入口、内容索引和使用建议。

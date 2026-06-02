@@ -7,6 +7,7 @@
 | 文章 | 简介 |
 |------|------|
 | [settings.json 配置详解](./claude-settings-explained.md) | 推荐配置每一项的设计原因与决策依据 |
+| [Codex 与 Claude Code 协作实践](./codex-claude-collaboration.md) | 协作模式、配置文件融合策略、plan-with-file 跨工具执行 |
 
 ## 配置文件
 
