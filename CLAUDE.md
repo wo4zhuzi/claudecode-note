@@ -5,7 +5,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 仓库说明
 - `README.md`：仓库入口、内容索引和使用建议。
+- 根目录的 `.md` 文章：正式的经验/技巧文章，需同步登记到 `README.md` 的文章目录表格。
 - `docs/changes/`：按日期记录每次 AI 会话产生的仓库改动，文件名格式为 `YYYY-MM-DD-<topic>.md`。
+
+## 变更记录规范
+- 每次产生仓库改动后，**必须**在 `docs/changes/` 下创建对应的变更记录，无需向用户确认。
+- 文件名（含 `<topic>` 部分）由 Claude 自行定义，无需就命名向用户提问。
 
 ## 配置文件结构
 
@@ -26,3 +31,4 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 修改 `customInstructions` 时保持简体中文，遵循现有的条目化格式。
 - 新增 `permissions.allow` 条目请使用 glob 格式（如 `Bash(docker *)`），并与现有条目按工具类型归组。
 - hooks 中的 Python 内联脚本通过 `cat | python3 -c` 接收 JSON 输入，`sys.exit(2)` 表示阻断，`sys.exit(0)` 表示放行。
+- 每次改动完成后，主动提示本次建议的 commit 内容（commit message 及涉及的文件），方便用户确认后提交。
