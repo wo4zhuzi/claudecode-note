@@ -19,7 +19,15 @@ claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem /you
 claude mcp add <名称> --transport sse --url http://localhost:3000/sse
 ```
 
-`claude mcp add` 默认写入全局配置 `~/.claude/mcp.json`，加 `--scope project` 写入当前项目的 `.mcp.json`。
+`claude mcp add` 默认是 **local** 作用域，配置存入 `~/.claude.json` 的 `projects["<当前项目路径>"].mcpServers` 下，仅在当前项目目录里对你自己生效。用 `-s/--scope` 切换作用域：
+
+| 命令 | 作用域 | 存储位置 | 生效范围 |
+|------|--------|---------|---------|
+| `claude mcp add <名称> -- ...` | local（默认） | `~/.claude.json` 中 `projects["<项目路径>"].mcpServers` | 仅当前项目，仅你自己 |
+| `claude mcp add -s user <名称> -- ...` | user | `~/.claude.json` 顶层 `mcpServers` | 你的所有项目（真正的「全局」） |
+| `claude mcp add -s project <名称> -- ...` | project | 项目根目录 `.mcp.json`（可提交、团队共享） | 当前项目，所有协作者 |
+
+> 注意：CLI 没有 `-g` / `--global` 选项。想让一个 MCP 在所有项目都可用，要用 `-s user`。
 
 管理命令：
 
@@ -31,7 +39,7 @@ claude mcp get <名称>     # 查看详情
 
 ### 方式二：直接编辑 .mcp.json
 
-适合批量配置或团队共享。项目级配置放在 `.mcp.json`（提交到仓库），全局配置放在 `~/.claude/mcp.json`。
+适合批量配置或团队共享。team 共享的项目级配置放在项目根目录的 `.mcp.json`（提交到仓库）；个人级配置由 CLI 写入 `~/.claude.json`，结构较复杂，一般用 `claude mcp add` 管理而非手改。下面是 `.mcp.json` 的示例：
 
 ```json
 {
@@ -109,13 +117,21 @@ npm i -g @colbymchenry/codegraph
 
 安装完后**开一个新终端**，旧终端的 PATH 还没有 `codegraph`。
 
-### 2. 连接到 Claude Code（全局，一次）
+### 2. 连接到 Claude Code
 
 ```bash
 claude mcp add codegraph -- codegraph mcp
 ```
 
-这一步把 CodeGraph MCP server 写入 `~/.claude/mcp.json`，Claude Code 重启后生效。
+这条命令是**默认的 local 作用域**：配置以当前项目路径为 key 存入 `~/.claude.json` 的 `projects` 段，只在这个项目目录下生效。所以要在哪个项目用 CodeGraph，就在哪个项目目录下执行这条命令。
+
+如果想让所有项目都能用，加 `--scope user` 写入用户级作用域：
+
+```bash
+claude mcp add --scope user codegraph -- codegraph mcp
+```
+
+Claude Code 重启后生效。
 
 如果你的项目 graph.db 不在默认位置，可以指定路径：
 
@@ -150,5 +166,5 @@ rm -rf .codegraph/
 ## 选择原则
 
 - 需要操作外部服务（GitHub、数据库、浏览器）：装对应官方 MCP，按需配置 token。
-- 需要代码理解加速（大型项目、降低费用）：装 CodeGraph，每个项目跑一次 `codegraph init -i`。
+- 需要代码理解加速（大型项目、降低费用）：装 CodeGraph，每个项目跑一次 `codegraph build`。
 - 团队共享配置：用项目级 `.mcp.json` 提交到仓库，个人 token 放 `env` 字段由各自环境变量注入。
