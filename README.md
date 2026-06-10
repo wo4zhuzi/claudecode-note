@@ -11,6 +11,7 @@
 | [插件与技能的安装方式](./plugin-skill-use.md) | Plugin 与 Standalone Skill 的区别、第三方市场安装、按需提取单个技能的方法 |
 | [MCP 应用安装指南](./mcp-installation-guide.md) | MCP 安装方式、实用 MCP 推荐、CodeGraph 完整安装步骤 |
 | [自建代码库情报 skill](./codebase-intel-skill.md) | 整合 CodeGraph 与 Understand-Anything 的个人分析工作流、任务→工具映射、出图三层降级 |
+| [AI 辅助模块重构工作流](./refactor-workflow.md) | 理解契约化、specs 验收标准、验证门禁与原子 commit 的六阶段重构闭环 |
 
 ## 自建 Skill
 
