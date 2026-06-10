@@ -10,6 +10,11 @@
 | [Codex 与 Claude Code 协作实践](./codex-claude-collaboration.md) | 协作模式、配置文件融合策略、plan-with-file 跨工具执行 |
 | [插件与技能的安装方式](./plugin-skill-use.md) | Plugin 与 Standalone Skill 的区别、第三方市场安装、按需提取单个技能的方法 |
 | [MCP 应用安装指南](./mcp-installation-guide.md) | MCP 安装方式、实用 MCP 推荐、CodeGraph 完整安装步骤 |
+| [自建代码库情报 skill](./codebase-intel-skill.md) | 整合 CodeGraph 与 Understand-Anything 的个人分析工作流、任务→工具映射、出图三层降级 |
+
+## 自建 Skill
+
+- [my-skills/](./my-skills/) — 个人沉淀的 standalone skill 集合，随仓库版本化，换机器时直接复制到 `~/.claude/skills/`
 
 ## 配置文件
 
