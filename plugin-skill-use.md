@@ -61,6 +61,21 @@ cp -r .../cache/.../skills/planning-with-files-zh ~/.claude/skills/  # 提取单
 /reload-plugins                                            # 生效
 ```
 
+## 案例三：understand-anything —— 第三方市场安装
+
+前两个案例的插件来源都是**已注册的现成市场**（`claude-plugins-official`、`planning-with-files`），直接 `install` 即可。但当你想装的插件来自一个 Claude Code 还不认识的第三方仓库时，要先把它的 GitHub 仓库**添加为插件市场**，再从该市场安装，共两步：
+
+```
+/plugin marketplace add Egonex-AI/Understand-Anything   # 添加第三方市场，市场名注册为 understand-anything
+/plugin install understand-anything@understand-anything # 从该市场安装插件
+```
+
+安装标识 `understand-anything@understand-anything` 的构成是 `<插件名>@<市场名>`，对应文章开头对比表里的 `/plugin install <name>@<source>`。两者同名只是巧合——前者是插件名，后者是 `marketplace add` 时注册的市场名。
+
+它属于**完整插件安装**：提供 `understand`、`understand-chat`、`understand-dashboard`、`understand-diff`、`understand-domain`、`understand-explain`、`understand-knowledge`、`understand-onboard` 共 8 个 `understand-*` 技能，外加配套 agents 与 hooks，作为整体使用、没有冗余变体。这与案例一同属一类，区别只在于来源是第三方市场而非官方市场。
+
+需要澄清的一点：understand-anything **不附带 MCP server**（`/reload-plugins` 会显示 `0 plugin MCP servers`）。如果你在会话里看到 `mcpCodegraph*` 这类工具，那是单独安装的 CodeGraph MCP 提供的（参见 [MCP 应用安装指南](./mcp-installation-guide.md)），与本插件无关，不要混为一谈。
+
 ## 关于 hook 路径变量
 
 独立技能模式下，SKILL.md 里 hook 命令使用的 `${CLAUDE_SKILL_DIR}` 会被正确注入为 `~/.claude/skills/<技能名>`，hooks 正常工作。

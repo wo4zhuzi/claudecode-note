@@ -8,7 +8,7 @@
 |------|------|
 | [settings.json 配置详解](./claude-settings-explained.md) | 推荐配置每一项的设计原因与决策依据 |
 | [Codex 与 Claude Code 协作实践](./codex-claude-collaboration.md) | 协作模式、配置文件融合策略、plan-with-file 跨工具执行 |
-| [插件与技能的安装方式](./plugin-skill-use.md) | Plugin 与 Standalone Skill 的区别、按需提取单个技能的方法 |
+| [插件与技能的安装方式](./plugin-skill-use.md) | Plugin 与 Standalone Skill 的区别、第三方市场安装、按需提取单个技能的方法 |
 | [MCP 应用安装指南](./mcp-installation-guide.md) | MCP 安装方式、实用 MCP 推荐、CodeGraph 完整安装步骤 |
 
 ## 配置文件
